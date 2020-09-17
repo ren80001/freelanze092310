@@ -1,0 +1,24 @@
+{% extends "register/base.html" %}
+{% block title %}ユーザーの詳細{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <img src="{{ user.top_image.url }}" class="img-thumbnail" width="250" heught="250">
+            <a href="{{ user.twitter }}"><i class="fab fa-twitter fa-4x my-example fa-fw"></i></a>
+            <a href="{{ user.instagram }}"><i class="fab fa-instagram fa-4x my-example fa-fw"></i></a>
+            <div class="name"><p class='border-bottom'>ニックネーム：{{ user.nick_name }}</p></div>
+            <div class="profile">
+                <p class='border-bottom'>■職種<br>{{ user.get_skill_display }}</br></p>
+                <p class='border-bottom'>■活動地域<br>{{ user.nick_name }}</br></p>
+                <p class='border-bottom'>■依頼料<br>{{ user.get_request_fee_display }}</br></p>
+                <br>■ポートフォリオ一覧<br>{{ user.portfolio | linebreaksbr }}</br></p>
+                <br>■自己PR<br>{{ user.self_introduction | linebreaksbr }}</br></p>
+                <button type="submit" class="btn btn-outline-info my-2 my-sm-0">直接メールでお仕事の依頼をする</button>
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+{% endblock %}

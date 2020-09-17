@@ -1,0 +1,55 @@
+{% extends "register/base.html" %}
+{% block content %}
+<table class="table">
+    <tbody>
+        <tr>
+            <th>トップ画像</th>
+            <td><img src="{{ user.top_image.url }}" class="img-fluid"></td>
+        </tr>
+        <tr>
+            <th>登録アドレス</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>姓</th>
+            <td>{{ user.last_name }}</td>
+        </tr>
+        <tr>
+            <th>名</th>
+            <td>{{ user.first_name }}</td>
+        </tr>
+        <tr>
+            <th>ニックネーム</th>
+            <td>{{ user.nick_name }}</td>
+        </tr>
+        <tr>
+            <th>ツイッターアカウント</th>
+            <td>{{ user.twitter }}</td>
+        </tr>
+        <tr>
+            <th>インスタグラムアカウント</th>
+            <td>{{ user.instagram }}</td>
+        </tr>
+        <tr>
+            <th>技術領域</th>
+            <td>{{ user.get_skill_display }}</td>
+        </tr>
+        <tr>
+            <th>活動領域</th>
+            <td>{{ user.get_area_display }}</td>
+        </tr>
+        <tr>
+            <th>ポートフォリオ</th>
+            <td>{{ user.portfolio | linebreaksbr}}</td>
+        </tr>
+        <tr>
+            <th>自己PR</th>
+            <td>{{ user.self_introduction | linebreaksbr}}</td>
+        </tr>
+        <tr>
+            <th>依頼料</th>
+            <td>{{ user.get_request_fee_display }}</td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

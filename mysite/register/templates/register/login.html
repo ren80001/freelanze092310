@@ -1,0 +1,35 @@
+{% extends "register/base.html" %}
+{% block content %}
+<div class="row">
+    <!-- 左側、ログインエリア -->
+    <div class="col-1 col-md-3"></div>
+    <div class="card col-10 col-md-6">
+        <p align="center">〜会員登録を行いアナタ自身をPRしましょう〜</p>
+        <div class="card-body">
+            <form action="{% url 'register:login' %}" method="POST">
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    {{ field }}
+                    {{ field.errors }}
+                    <hr>
+                {% endfor %}
+                <button type="submit" class="btn btn-outline-info btn-lg btn-block" >ログイン</button>
+                <input type="hidden" name="next" value="{{ next }}" />
+                {% csrf_token %}
+            </form>
+        </div>
+        <p align="center">または</p>
+        <div class="card-body">
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger btn-lg btn-block" >Googleアカウントでログイン</a>
+        </div>
+        <div class="card-body">
+            <a href="{% url 'register:test_login' %}" class="btn btn-outline-info btn-lg btn-block" >テストユーザーでお試し</a>
+        </div>
+        <div class="card-body">
+            <a href="{% url 'register:user_create' %}" class="btn btn-outline-info btn-lg btn-block" >新規会員登録</a>
+        </div>
+    </div><!-- 左側、ログインエリアおわり -->
+    <div class="col-1 col-md-3"></div>
+    <!-- 右側、会員登録エリア　コメント解除で新規会員登録昨日が可能 -->
+</div>
+{% endblock %}

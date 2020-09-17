@@ -1,0 +1,216 @@
+{% extends "register/base.html" %}
+{% block title %}Topページ{% endblock %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12" style="mx-auto">
+            <p class="text-center"><span class="bg-white text-primary">＼新着フリーランス一覧／</span></p>
+        </div>
+        {% for product in user_list %}
+        <div class="col-6 col-md-6">
+            <div class="datail" data-toggle="modal" data-target="#{{ product.id }}">
+            <div class="card mb-3" style="max-width: 500px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <div class="img-thumbnail">
+                        <img src="{{ product.top_image.url }}" class="aaa" width="100%" heught="100%">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p class="card-text">職種：{{ product.get_skill_display }}</p>
+                            <p class="card-text">依頼料：{{ product.get_request_fee_display }}</p>
+                            <p class="card-text">名前：{{ product.nick_name }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- モーダルの設定 -->
+        <div class="modal fade" id="{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">「{{ product.nick_name }}」の詳細情報</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="text-center">
+                                        <img src="{{ product.top_image.url }}" class="rounded-circle" alt="参考画像" style="width:auto; height:200px" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <div class="text-center">
+                                        <span class="border-bottom">
+
+                                        {% if product.twitter %}
+                                        <a href="{{ product.twitter }}">
+                                            <i class="fab fa-twitter fa-3x my-example fa-fw"></i>
+                                            ←check
+                                        </a>
+                                        {% endif %}
+                                            </span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-center">
+                                        <span class="border-bottom">
+                                        {% if product.instagram %}
+                                        <a href="{{ product.instagram }}" class="insta_btn">
+                                            <span class="insta">
+                                                <i class="fab fa-instagram"></i>
+                                            </span>←check</a>
+                                        {% endif %}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <p class='border-bottom'>■ニックネーム<br>{{ product.nick_name }}</p>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class='border-bottom'>■職種<br>{{ product.get_skill_display }}</br></p>
+                                    <p class='border-bottom'>■活動地域<br>{{ product.get_area_display }}</br></p>
+                                    <p class='border-bottom'>■依頼料<br>{{ product.get_request_fee_display }}</br></p>
+                                    {% if product.portfolio %}
+                                    <p>■ポートフォリオ一覧<br>{{ product.portfolio | linebreaksbr }}</br></p>
+                                    {% endif %}
+                                    <p>■自己PR<br>{{ product.self_introduction | linebreaksbr }}</br></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="mailto:{{ product.email }}">
+                            <button type="submit" class="btn btn-outline-info my-2 my-sm-0">直接メールでお仕事の依頼をする</button>
+                        </a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                    </div><!-- /.modal-footer -->
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        {% endfor %}
+    </div>
+</div>
+<!--ページネーション↓-->
+<ul class="pagination">
+    <!-- 前へ の部分 -->
+    {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+    {% endif %}
+    <!-- 数字の部分 -->
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <li class="page-item active"><a class="page-link" href="#!">{{ num }}</a></li>
+        {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+        {% endif %}
+    {% endfor %}
+    <!-- 次へ の部分 -->
+    {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    {% endif %}
+</ul>
+
+
+
+<!--ページネーション↑-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12"><p class="text-center"><span class="bg-white text-primary">＼おすすめフリーランスTop5／</span></p></div>
+        <div class="col-12 col-md-6">
+            <div class="card mb-3" style="max-width: 500px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="..." class="card-img" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">カードのタイトル</h5>
+                            <p class="card-text">...</p>
+                            <p class="card-text"><small class="text-muted">最終更新3分前</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- モーダルの設定 -->
+        <div class="modal fade" id="{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">「{{ product.nick_name }}」の詳細情報</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                  <img src="{{ product.top_image.url }}" class="img-thumbnail">
+                                </div>
+                                <div class="col-6">
+                                    <div class="col">
+                                        {% if product.twitter %}
+                                        <a href="{{ product.twitter }}"><i class="fab fa-twitter fa-3x my-example fa-fw"></i></a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col">
+                                        {% if product.instagram %}
+                                        <a href="{{ product.instagram }}"><i class="fab fa-instagram fa-3x my-example fa-fw"></i></a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex align-items-end">
+                                        <p class='border-bottom'>■ニックネーム<br>{{ product.nick_name }}</br></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class='border-bottom'>■職種<br>{{ product.get_skill_display }}</br></p>
+                                    <p class='border-bottom'>■活動地域<br>{{ product.get_area_display }}</br></p>
+                                    <p class='border-bottom'>■依頼料<br>{{ product.get_request_fee_display }}</br></p>
+                                    <p>■ポートフォリオ一覧<br>{{ product.portfolio | linebreaksbr }}</br></p>
+                                    <p>■自己PR<br>{{ product.self_introduction | linebreaksbr }}</br></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="mailto:{{ product.email }}">
+                            <button type="submit" class="btn btn-outline-info my-2 my-sm-0">直接メールでお仕事の依頼をする</button>
+                        </a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                    </div><!-- /.modal-footer -->
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+</div>
+
+{% endblock %}

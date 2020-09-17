@@ -1,0 +1,97 @@
+<!-- マイページ -->
+
+{% extends "register/base.html" %}
+{% block content %}
+<form action="" method="POST" enctype="multipart/form-data">
+    {{ form.non_field_errors }}
+    <div class="container">
+    <div class="row">
+        <div class="col-6">
+            <th><label for="{{ form.image.label }}">{{ form.image.label }}</label></th>
+                <td>{{ form.top_image }}</td>
+        </div>
+        <div class="col-6">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <tr>
+                <th><label for="{{ form.last_name.label }}">{{ form.last_name.label }}</label></th>
+                <td>{{ form.last_name }}</td>
+            </tr>
+        </div>
+        <div class="col-6">
+            <tr>
+                <th><label for="{{ form.first_name.label }}">{{ form.first_name.label }}</label></th>
+                <td>{{ form.first_name }}</td>
+            </tr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <tr>
+                <th><label for="{{ form.nick_name.label }}">{{ form.nick_name.label }}</label></th>
+                <td>{{ form.nick_name }}</td>
+            </tr>
+        </div>
+        <div class="col-6">
+            <tr>
+                <th><label for="{{ form.request_fee.label }}">{{ form.request_fee.label }}</label></th>
+                <td>{{ form.request_fee }}</td>
+            </tr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <tr>
+                <th><label for="{{ form.twitter.label }}" placeholder="info@example.com">{{ form.twitter.label }}</label></th>
+                <td>{{ form.twitter }}</td>
+            </tr>
+        </div>
+        <div class="col-6">
+            <tr>
+                <th><label for="{{ form.instagram.label }}">{{ form.instagram.label }}</label></th>
+                <td>{{ form.instagram }}</td>
+            </tr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <tr>
+                <th><label for="{{ form.area.label }}">{{ form.area.label }}</label></th>
+                <td>{{ form.area }}</td>
+            </tr>
+        </div>
+        <div class="col-6">
+            <tr>
+                <th><label for="{{ form.skill.label }}">{{ form.skill.label }}</label></th>
+                <td>{{ form.skill }}</td>
+            </tr>
+        </div>
+    </div>
+        <div class="row">
+        <div class="col-8">
+            <tr>
+                <th><label for="{{ form.portfolio.label }}">{{ form.portfolio.label }}</label></th>
+                <td>{{ form.portfolio }}</td>
+            </tr>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <tr>
+                <th><label for="{{ form.self_introduction.label }}">{{ form.self_introduction.label }}</label></th>
+                <td>{{ form.self_introduction }}</td>
+            </tr>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+    {% csrf_token %}
+<button type="submit" class="btn btn-success btn-lg" >編集を確定</button>
+</form>
+
+{% endblock %}
